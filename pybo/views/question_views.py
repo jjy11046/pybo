@@ -1,4 +1,4 @@
-from django.contrib import massages
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
@@ -61,7 +61,7 @@ def question_delete(request, question_id):
     """
     question = get_object_or_404(Question, pk=question_id)
     if request.user != question.author:
-        massages.error(request, '삭제권한이 없습니다')
+        messages.error(request, '삭제권한이 없습니다')
         return redirect('pybo:detail', question_id=question.id)
     question.delete()
     return redirect('pybo:index')
